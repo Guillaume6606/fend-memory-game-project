@@ -1,10 +1,22 @@
+// VARIABLES DEFINITION
+/*
+ * Create a reference variable for the deck
+ */
+
+const deck = $('.deck');
+
 /*
  * Create a list that holds all of your cards
  */
- const deck = $('.deck');
+
  const cards = $('.card');
  const cardsArray = cards.toArray();
-console.log(cards);
+
+/*
+ * Create an array for the cards face up
+ */
+
+ let openCards = [];
 
 /*
  * Display the cards on the page
@@ -51,8 +63,26 @@ $('.restart').click(function(){
  function reveal(card){
    card.toggleClass('open');
    card.toggleClass('show');
- }
+ };
+
+ function compare(array){
+   if(array.length==2){
+     if(array[0].children().first().attr('class')==array[1].children().first().attr('class')) {
+       array[0].toggleClass('match');
+       array[1].toggleClass('match');
+     } else {
+       array[0].toggleClass('open');
+       array[0].toggleClass('show');
+       array[1].toggleClass('open');
+       array[1].toggleClass('show');
+       array.length = 0;
+     }
+   }
+ };
 
  cards.click(function(){
    reveal($(this));
+   openCards.push($(this));
+   console.log(openCards);
+   compare(openCards);
  });
