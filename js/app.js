@@ -101,6 +101,18 @@ $('.restart').click(function(){
    $('.moves').text(moveCounter);
  };
 
+ function score() {
+   if (moveCounter==17) {
+     $('.stars li:first-child').remove();
+   };
+   if (moveCounter==25) {
+     $('.stars li:first-child').remove();
+   };
+   if (moveCounter==35) {
+     $('.stars li:first-child').remove();
+   };
+ };
+
  function win(){
   let victory=true;
   cards.each(function(){
@@ -108,7 +120,7 @@ $('.restart').click(function(){
   });
   if(victory){
     $('#popup').removeClass('hidden');
-    $('#victoryMessage').text(`You managed to beat the game in ${moveCounter} moves!`);
+    $('#victoryMessage').text(`You managed to beat the game in ${moveCounter} moves! You scored ${$('.stars li').length} stars!`);
   };
 };
 
@@ -121,5 +133,6 @@ $('.popup-close').click(function(){
    openCards.push($(this));
    compare(openCards);
    updateCounter();
+   score();
    win();
  });
