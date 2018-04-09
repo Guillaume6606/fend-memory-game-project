@@ -47,14 +47,21 @@ function shuffle(array) {
 }
 
 $('.restart').click(function(){
-  const shuffledCardsArray = shuffle(cardsArray);
-  moveCounter=0;
+/*
+ * Reset the move counter
+ */
+  moveCounter=-1;
+  updateCounter();
   openCards.length=0;
-
+/*
+ * Hiding the cards and reshuffling them
+ */
+  $('.card').removeClass('match show open');
+  const shuffledCardsArray = shuffle(cardsArray);
   for (const card of shuffledCardsArray) {
     deck.append(card);
-  }
-})
+  };
+});
 
 
 /*
