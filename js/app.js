@@ -50,7 +50,7 @@ $('.restart').click(function(){
   const shuffledCardsArray = shuffle(cardsArray);
   moveCounter=0;
   openCards.length=0;
-  
+
   for (const card of shuffledCardsArray) {
     deck.append(card);
   }
@@ -78,6 +78,7 @@ $('.restart').click(function(){
      if(array[0].children().first().attr('class')==array[1].children().first().attr('class')) {
        array[0].toggleClass('match');
        array[1].toggleClass('match');
+       array.length = 0;
      } else {
        array[0].toggleClass('open');
        array[0].toggleClass('show');
@@ -91,7 +92,7 @@ $('.restart').click(function(){
  function updateCounter() {
    moveCounter+=1;
    $('.moves').text(moveCounter);
- }
+ };
 
  cards.click(function(){
    reveal($(this));
