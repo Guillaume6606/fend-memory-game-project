@@ -19,6 +19,12 @@ const deck = $('.deck');
  let openCards = [];
 
 /*
+ * Create a move counter and initialize it
+ */
+
+let moveCounter = 0;
+
+/*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
@@ -42,7 +48,9 @@ function shuffle(array) {
 
 $('.restart').click(function(){
   const shuffledCardsArray = shuffle(cardsArray);
-
+  moveCounter=0;
+  openCards.length=0;
+  
   for (const card of shuffledCardsArray) {
     deck.append(card);
   }
@@ -80,9 +88,14 @@ $('.restart').click(function(){
    }
  };
 
+ function updateCounter() {
+   moveCounter+=1;
+   $('.moves').text(moveCounter);
+ }
+
  cards.click(function(){
    reveal($(this));
    openCards.push($(this));
-   console.log(openCards);
    compare(openCards);
+   updateCounter();
  });
