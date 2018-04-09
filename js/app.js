@@ -25,6 +25,13 @@ const deck = $('.deck');
 let moveCounter = 0;
 
 /*
+ * Create a time variable and the variable of the timer
+ */
+
+let timeCounter = 0;
+let timerFunction;
+
+/*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
@@ -48,8 +55,10 @@ function shuffle(array) {
 
 $('.restart').click(function(){
 /*
- * Reset the move counter
+ * Reset the timer and move counter
  */
+  timeCounter=0;
+  updateTimer();
   moveCounter=-1;
   updateCounter();
   openCards.length=0;
@@ -113,14 +122,19 @@ $('.restart').click(function(){
    };
  };
 
+ function updateTimer() {
+   $('.timer').text(timeCounter);
+ };
+
  function win(){
   let victory=true;
   cards.each(function(){
     victory=(victory) && ($(this).hasClass('match'));
   });
   if(victory){
+    clearInterval(timerFunction);
     $('#popup').removeClass('hidden');
-    $('#victoryMessage').text(`You managed to beat the game in ${moveCounter} moves! You scored ${$('.stars li').length} stars!`);
+    $('#victoryMessage').text(`You managed to beat the game in ${moveCounter} moves! You scored ${$('.stars li').length} stars and did it in ${timeCounter} seconds!`);
   };
 };
 
@@ -129,6 +143,12 @@ $('.popup-close').click(function(){
 });
 
  cards.click(function(){
+   if(moveCounter==1){
+       timerFunction = setInterval(function(){
+       timeCounter+=1;
+       updateTimer();
+     },1000);
+   };
    reveal($(this));
    openCards.push($(this));
    compare(openCards);

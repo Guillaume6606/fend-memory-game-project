@@ -108,8 +108,27 @@ h1 {
     cursor: pointer;
 }
 
+.timer {
+  margin-left: 60px;
+}
+
 .hidden {
   display:none;
+}
+
+.popup-close {
+  position:absolute;
+  width:30px;
+  height:30px;
+  right:0px;
+  top:0px;
+  padding:4px;
+  transform:translate(50%,-50%);
+  text-align: center;
+  color:white;
+  text-decoration: none;
+  background:rgba(0,0,0,0.75);
+  border-radius: 50px;
 }
 
 #popup{
@@ -134,18 +153,4 @@ h1 {
   transform:translate(-50%, -50%);
   background:#fff;
   border-radius:4px;
-}
-.popup-close {
-  position:absolute;
-  width:30px;
-  height:30px;
-  right:0px;
-  top:0px;
-  padding:4px;
-  transform:translate(50%,-50%);
-  text-align: center;
-  color:white;
-  text-decoration: none;
-  background:rgba(0,0,0,0.75);
-  border-radius: 50px;
 }
