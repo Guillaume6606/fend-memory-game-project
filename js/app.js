@@ -54,14 +54,23 @@ function shuffle(array) {
 }
 
 $('.restart').click(function(){
+
 /*
  * Reset the timer and move counter
  */
+  clearInterval(timerFunction);
   timeCounter=0;
   updateTimer();
   moveCounter=-1;
   updateCounter();
   openCards.length=0;
+
+/*
+ * Reset the number of stars
+ */
+
+  $('.stars').html('<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>')
+
 /*
  * Hiding the cards and reshuffling them
  */
