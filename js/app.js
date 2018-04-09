@@ -101,9 +101,25 @@ $('.restart').click(function(){
    $('.moves').text(moveCounter);
  };
 
+ function win(){
+  let victory=true;
+  cards.each(function(){
+    victory=(victory) && ($(this).hasClass('match'));
+  });
+  if(victory){
+    $('#popup').removeClass('hidden');
+    $('#victoryMessage').text(`You managed to beat the game in ${moveCounter} moves!`);
+  };
+};
+
+$('.popup-close').click(function(){
+  $('#popup').addClass('hidden');
+});
+
  cards.click(function(){
    reveal($(this));
    openCards.push($(this));
    compare(openCards);
    updateCounter();
+   win();
  });
