@@ -32,6 +32,12 @@ let timeCounter = 0;
 let timerFunction;
 
 /*
+ * Create a boolean flag to manage card timing
+ */
+
+let run = true;
+
+/*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
@@ -58,6 +64,7 @@ $('.restart').click(function(){
 /*
  * Reset the timer and move counter
  */
+
   clearInterval(timerFunction);
   timeCounter=0;
   updateTimer();
@@ -81,7 +88,6 @@ $('.restart').click(function(){
   };
 });
 
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -100,18 +106,22 @@ $('.restart').click(function(){
 
  function compare(array){
    if(array.length==2){
-     if(array[0].children().first().attr('class')==array[1].children().first().attr('class')) {
-       array[0].toggleClass('match');
-       array[1].toggleClass('match');
-       array.length = 0;
-     } else {
-       array[0].toggleClass('open');
-       array[0].toggleClass('show');
-       array[1].toggleClass('open');
-       array[1].toggleClass('show');
-       array.length = 0;
-     }
-   }
+     run=false;
+     setTimeout(function(){
+       if(array[0].children().first().attr('class')==array[1].children().first().attr('class')) {
+         array[0].toggleClass('match');
+         array[1].toggleClass('match');
+         array.length = 0;
+       } else {
+         array[0].toggleClass('open');
+         array[0].toggleClass('show');
+         array[1].toggleClass('open');
+         array[1].toggleClass('show');
+         array.length = 0;
+       };
+       run=true;
+     }, 500);
+   };
  };
 
  function updateCounter() {
@@ -152,16 +162,20 @@ $('.popup-close').click(function(){
 });
 
  cards.click(function(){
-   if(moveCounter==1){
-       timerFunction = setInterval(function(){
-       timeCounter+=1;
-       updateTimer();
-     },1000);
+  if(run==true){
+    reveal($(this));
+    updateCounter();
+    if(moveCounter==1){
+         timerFunction = setInterval(function(){
+         timeCounter+=1;
+         updateTimer();
+       },1000);
+     };
+     openCards.push($(this));
+     compare(openCards);
+     score();
+     setTimeout(function(){
+     win();
+   }, 600);
    };
-   reveal($(this));
-   openCards.push($(this));
-   compare(openCards);
-   updateCounter();
-   score();
-   win();
  });
