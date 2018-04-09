@@ -1,7 +1,10 @@
 /*
  * Create a list that holds all of your cards
  */
-
+ const deck = $('.deck');
+ const cards = $('.card');
+ const cardsArray = cards.toArray();
+console.log(cards);
 
 /*
  * Display the cards on the page
@@ -24,6 +27,14 @@ function shuffle(array) {
 
     return array;
 }
+
+$('.restart').click(function(){
+  const shuffledCardsArray = shuffle(cardsArray);
+
+  for (const card of shuffledCardsArray) {
+    deck.append(card);
+  }
+})
 
 
 /*
