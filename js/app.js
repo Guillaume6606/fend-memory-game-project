@@ -104,6 +104,13 @@ $('.restart').click(function(){
    card.toggleClass('show');
  };
 
+/*
+ * Function comparing the classes of the cards in the array that is passed to it.
+ * Passed a "run" flag to it so that the user is unable to click when execting.
+ * It prevents the user from putting more than 3 cards in the Array before the
+ * end of the execution, which caused issues
+ */
+
  function compare(array){
    if(array.length==2){
      run=false;
@@ -124,6 +131,10 @@ $('.restart').click(function(){
    };
  };
 
+/*
+ * Simply adds one to the move counter and updates the display
+ */
+
  function updateCounter() {
    moveCounter+=1;
    $('.moves').text(moveCounter);
@@ -141,9 +152,19 @@ $('.restart').click(function(){
    };
  };
 
+/*
+ * Updates the time display
+ */
+
  function updateTimer() {
    $('.timer').text(timeCounter);
  };
+
+/*
+ * Controls whether the player has finished the game by testing for the "match"
+ * class of all the cards
+ * In case of victory, shows the popup message
+ */
 
  function win(){
   let victory=true;
@@ -160,6 +181,12 @@ $('.restart').click(function(){
 $('.popup-close').click(function(){
   $('#popup').addClass('hidden');
 });
+
+/*
+ * Event listener that triggers all the precedently defined functions when
+ * clicking on a cards
+ * Also launches the timer on the first move
+ */
 
  cards.click(function(){
   if(run==true){
