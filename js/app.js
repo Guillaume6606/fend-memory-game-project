@@ -190,19 +190,23 @@ $('.popup-close').click(function(){
 
  cards.click(function(){
   if(run==true){
-    reveal($(this));
-    updateCounter();
-    if(moveCounter==1){
-         timerFunction = setInterval(function(){
-         timeCounter+=1;
-         updateTimer();
-       },1000);
+    if(!($(this).hasClass('match'))) {
+      if(!($(this).hasClass('open'))) {
+        reveal($(this));
+        updateCounter();
+        if(moveCounter==1){
+             timerFunction = setInterval(function(){
+             timeCounter+=1;
+             updateTimer();
+           },1000);
+         };
+         openCards.push($(this));
+         compare(openCards);
+         score();
+         setTimeout(function(){
+         win();
+       }, 600);
      };
-     openCards.push($(this));
-     compare(openCards);
-     score();
-     setTimeout(function(){
-     win();
-   }, 600);
-   };
+    };
+ };
  });
